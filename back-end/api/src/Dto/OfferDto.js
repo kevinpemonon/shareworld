@@ -1,4 +1,3 @@
-const Offer = require("../models/Offer");
 const User = require("../models/User");
 const Address = require("../models/Address");
 const Category = require("../models/Category");

@@ -1,5 +1,4 @@
 import NsOffer from "../models/NsOffer";
-import NsUser from "../models/NsUser";
 
 enum Status {
   EnCours = "En cours(ouverte)",
