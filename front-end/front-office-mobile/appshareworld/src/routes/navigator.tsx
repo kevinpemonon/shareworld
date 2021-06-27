@@ -2,13 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
-import {
-  View,
-  TouchableOpacity,
-  StyleSheet,
-  TextInput,
-  Button,
-} from "react-native";
+import { View, TouchableOpacity, StyleSheet } from "react-native";
 
 import HomeScreen from "../screens/HomeScreen";
 import NotificationScreen from "../screens/NotificationScreen";
@@ -24,8 +18,6 @@ import UserActionsScreen from "../screens/profile/UserActionsScreen";
 import NsPropsType from "./propsType";
 import { SignInScreen } from "../screens/authScreen/SignIn";
 import SignUpScreen from "../screens/authScreen/SignUp";
-import { authService } from "../services/auth.service";
-import { useNavigation } from "@react-navigation/core";
 
 export interface Props {
   isDisconnected: boolean;
@@ -34,19 +26,6 @@ export interface Props {
 const Tab = createBottomTabNavigator();
 
 const HomeStack = createStackNavigator();
-
-// function messageDisconnect(props: Props) {
-//   const navigation = useNavigation();
-//   if (props.isDisconnected == false) {
-//     authService.login_service;
-//     console.log("Connecté");
-//   }
-//   if (props.isDisconnected == true) {
-//     authService.logout_service();
-//     navigation.navigate("HomeScreen");
-//     console.log("Déconnecté");
-//   }
-// }
 
 function HomeStackScreen() {
   return (

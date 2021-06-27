@@ -1,5 +1,3 @@
-const Offer = require("../models/Offer");
-const offerRouter = require("../routes/offerRoutes");
 const OfferService = require("../services/OfferService");
 
 module.exports = {

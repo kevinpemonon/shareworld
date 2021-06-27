@@ -1,5 +1,4 @@
 import NsAddress from "./NsAddress";
-import NsCategory from "./NsCategory";
 import NsUser from "./NsUser";
 
 declare namespace NsOffer {

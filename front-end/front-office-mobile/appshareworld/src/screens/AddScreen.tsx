@@ -311,7 +311,7 @@ const AddScreen: React.FC<NsPropsType.CreateProps> = ({ navigation, route }) => 
             return false;
         }
 
-        return true
+        return true;
     }
 
     /* Submit Offer */

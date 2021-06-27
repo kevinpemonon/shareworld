@@ -113,10 +113,9 @@ const SearchListScreen: React.FC<NsPropsType.SearchProps> = ({ navigation, route
 
     const [errorFound, setErrorFound] = useState(false);
 
-    /* const [location, setLocation] = useState<LocationObject>(); */
     const [errorMsg, setErrorMsg] = useState('');
 
-    const [numberPages, setNumberPages] = useState(0);
+    const [setNumberPages] = useState(0);
 
     const [search, setSearch] = useState(categoryLabel ? categoryLabel : '');
 

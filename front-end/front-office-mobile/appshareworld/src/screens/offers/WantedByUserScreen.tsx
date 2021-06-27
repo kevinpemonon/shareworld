@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
-  Button,
   FlatList,
   ListRenderItem,
   ActivityIndicator,
@@ -99,9 +98,7 @@ const WantedByUserScreen: React.FC = ({ route }: any) => {
           )}
         </View>
         <Text style={{ color: COLORS.red1, fontStyle: "italic" }}>
-          {item.validate_by_owner
-            ? "Acceptée"
-            : "Non acceptée"}
+          {item.validate_by_owner ? "Acceptée" : "Non acceptée"}
         </Text>
       </View>
       <View
@@ -149,9 +146,5 @@ const WantedByUserScreen: React.FC = ({ route }: any) => {
     </View>
   );
 };
-
-const style = StyleSheet.create({
-  contentItem: {},
-});
 
 export default WantedByUserScreen;

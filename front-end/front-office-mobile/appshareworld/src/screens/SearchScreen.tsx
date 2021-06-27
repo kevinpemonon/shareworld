@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, ActivityIndicator, FlatList, TextInput, ListRenderItem, Image, TouchableHighlight } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -11,8 +11,6 @@ import { categoryService } from '../services/categoryService';
 const SearchScreen: React.FC<NsPropsType.SearchProps> = ({ navigation, route }: NsPropsType.SearchProps) => {
 
     const [errorFound, setErrorFound] = useState(false);
-
-    const [errorMsg, setErrorMsg] = useState('');
 
     const [categories, setCategories] = useState<NsCategory.ICategory[]>([]);
     useEffect(() => {
@@ -40,12 +38,6 @@ const SearchScreen: React.FC<NsPropsType.SearchProps> = ({ navigation, route }: 
         refresh();
 
     }, []);
-    /* const { data, error } = useFetchCategories();
-
-    if (error) {
-        console.log(error)
-        setErrorFound(true);
-    } */
 
     const CategoryComponent: ListRenderItem<NsCategory.ICategory> = ({ item }) => (
         <TouchableHighlight key={item.id}

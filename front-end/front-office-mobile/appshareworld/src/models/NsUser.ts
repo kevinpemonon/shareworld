@@ -1,6 +1,3 @@
-import NsAddress from "./NsAddress";
-import NsUserWantOffers from "./NsUserWantOffers";
-
 declare namespace NsUser {
   export interface IUserWantedOfferData {
     id: number;

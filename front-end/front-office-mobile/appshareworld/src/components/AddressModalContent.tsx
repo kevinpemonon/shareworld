@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, FlatList, TextInput, ListRenderItem, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, FlatList, TextInput, ListRenderItem } from 'react-native';
 
 import NsGeo from '../models/NsGeo';
 import { COLORS } from './Styles';
