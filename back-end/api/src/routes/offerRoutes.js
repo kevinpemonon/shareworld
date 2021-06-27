@@ -21,7 +21,6 @@ offerRouter.get("/by/date/local", (req, res) => {
   OfferController.getOfferByDateLocal(req, res);
 });
 
-// Create a offer with images(mandatory)
 offerRouter.post("/", multer(ImageUploader).array("images", 3), (req, res) => {
   OfferController.createOffer(req, res);
 });
@@ -30,20 +29,8 @@ offerRouter.get("/createdBy/:userId", (req, res) => {
   OfferController.getOffersCreatedByUser(req, res);
 });
 
-offerRouter.put("/update/:offerId", (req, res) => {
-  OfferController.updateOffer(req, res);
-});
+offerRouter.put("/update/:offerId", (req, res) => {OfferController.updateOffer(req, res)});
 
-
-/**
- * @swagger
- * /offers:
- *  delete:
- *    description: Delete an offer
- *    responses:
- *      '200':
- *        description: Offer deleting with success
- */
 offerRouter.delete("/:offerId", (req, res) => {
   OfferController.deleteOffer(req, res);
 });

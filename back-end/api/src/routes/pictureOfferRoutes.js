@@ -1,11 +1,7 @@
 const express = require("express");
 const path = require("path");
-const fs = require("fs");
 const multer = require("multer");
-const PictureOffer = require("../models/PictureOffer");
 const PictureOfferController = require("../controllers/PictureOfferController");
-const ImageUploader = require("../helpers/imagesUploader");
-const imagesUploader = require("../helpers/imagesUploader");
 
 const pictureOfferRouter = express.Router();
 
@@ -31,7 +27,7 @@ const configMulter = {
 
 pictureOfferRouter.get("/:offerId", PictureOfferController.getAllPicturesByOffer);
 
-pictureOfferRouter.get("/offers/:name", PictureOfferController.getFile());
+pictureOfferRouter.get("/offers/:name", PictureOfferController.getFile);
 
 pictureOfferRouter.post("/", multer(configMulter).single("image"), PictureOfferController.createPicture);
 

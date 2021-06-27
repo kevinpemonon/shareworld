@@ -1,15 +1,18 @@
 const fs = require("fs");
 const path = require("path");
 const PictureOffer = require("../models/PictureOffer");
-const User = require("../models/User");
 
 module.exports = {
-  
   async serviceGetAllPicturesByOffer(offerId) {
     const pictures = await PictureOffer.findAll({
       where: { offer_id: offerId },
     });
     return pictures;
+  },
+
+  async serviceGetFile(name) {
+    const file = res.sendFile(path.join(__dirname, "../../uploads/offers/" + name));
+    return file;
   },
 
   async serviceCreatePicture(offerId, image) {

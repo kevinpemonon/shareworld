@@ -1,8 +1,4 @@
 const { Sequelize, QueryTypes } = require("sequelize");
-const Address = require("../models/Address");
-const Offer = require("../models/Offer");
-const PictureOffer = require("../models/PictureOffer");
-const User = require("../models/User");
 
 const sequelize = new Sequelize(
   process.env.DB_NAME,
@@ -206,7 +202,8 @@ module.exports = {
   async repositoryUpdateOffer(_id, newOffer, newAddressId) {
     const result = await mySequelize.query(
       "UPDATE offers SET " +
-        "label = $label, description = $description, display_phone = $display_phone, display_mail = $display_mail, " +
+        "label = $label, description = $description, " +
+        "display_phone = $display_phone, display_mail = $display_mail, " +
         "state = $state, is_owner_address = $is_owner_address, " +
         "category_id = $category_id, " +
         "exchange_address_id = $exchange_address_id " +
@@ -273,7 +270,8 @@ module.exports = {
       };
 
       const userWantOffers = await mySequelize.query(
-        "SELECT users.id, users.first_name, users.last_name, users.phone, users.mail, users.note, user_want_offers.validate_by_owner," +
+        "SELECT users.id, users.first_name, users.last_name, users.phone, " +
+          "users.mail, users.note, user_want_offers.validate_by_owner," +
           "user_want_offers.validate_by_aquirer FROM user_want_offers " +
           "JOIN users ON user_want_offers.user_id = users.id " +
           "WHERE offer_id = $offerId",

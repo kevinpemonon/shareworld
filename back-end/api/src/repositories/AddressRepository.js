@@ -6,6 +6,7 @@ const mySequelize = new Sequelize("shareworld", "postgres", "pempem", {
 });
 
 module.exports = {
+
   async createAddress(newAddress, coord) {
     const timestamp = new Date();
     const day = timestamp.getDate();
@@ -37,9 +38,7 @@ module.exports = {
 
   async deleteAddress(_id) {
     const address = mySequelize.query("DELETE FROM addresses WHERE id = $id", {
-      bind: {
-        id: _id,
-      },
+      bind: {id: _id},
       type: QueryTypes.DELETE,
     });
     return address;
@@ -47,9 +46,7 @@ module.exports = {
 
   async getAddressById(_id) {
     const result = mySequelize.query("SELECT * FROM addresses WHERE id = $id", {
-      bind: {
-        id: _id,
-      },
+      bind: {id: _id},
       type: QueryTypes.SELECT,
     });
     return result;

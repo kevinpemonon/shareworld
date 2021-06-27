@@ -289,60 +289,53 @@ module.exports = {
     }
     const oldAddressId = newOffer.exchange_address.id;
 
-    let _newOffer = newOffer;
-
-    if (newOffer) {
-      if (newOffer.is_owner_address) {
-        const offer = await offerRepository.repositoryUpdateOffer(
-          _id,
-          _newOffer,
-          _newOffer.owner.address.id
-        );
-        // DESTROY OLD ADDRESS OF OFFER IF IS NOT ADDRESS OF OWNER
-        if (newOffer.owner.address.id !== newOffer.exchange_address.id) {
-          await addressRepository.deleteAddress(oldAddressId);
-        }
-        return offer;
-      } else {
-        // CREATE NEW ADDRESS
-        const geocoder = NodeGeocoder({
-          provider: "openstreetmap",
-        });
-        const address =
-          newOffer.exchange_address.number.toString() +
-          " " +
-          newOffer.exchange_address.street +
-          " " +
-          newOffer.exchange_address.city;
-        const coord = await geocoder.geocode(address.toLowerCase());
-        const newAddress = await addressRepository.createAddress(
-          newOffer.exchange_address,
-          coord
-        );
-
-        // UPDATE ATTRIBUTES OF OFFER
-        _newOffer.is_owner_address = false;
-
-        const offer = await offerRepository.repositoryUpdateOffer(
-          _id,
-          _newOffer,
-          newAddress[0][0].id
-        );
-
-        // DESTROY OLD ADDRESS IF IS NOT ADDRESS OF OWNER
-        const reqOwnerAddressId = await userRepository.getOwnerAddressId(
-          newOffer.owner.id
-        );
-        const ownerAddressId = reqOwnerAddressId[0].address_id;
-        if (oldAddressId !== ownerAddressId) {
-          await addressRepository.deleteAddress(oldAddressId);
-        }
-
-        return offer;
+    if (newOffer.is_owner_address) {
+      const offer = await offerRepository.repositoryUpdateOffer(
+        _id,
+        newOffer,
+        newOffer.owner.address.id
+      );
+      // DESTROY OLD ADDRESS OF OFFER IF IS NOT ADDRESS OF OWNER
+      if (newOffer.owner.address.id !== newOffer.exchange_address.id) {
+        await addressRepository.deleteAddress(oldAddressId);
       }
-      // UPDATE OFFER
+      return offer;
     } else {
-      return null;
+      // CREATE NEW ADDRESS
+      const geocoder = NodeGeocoder({
+        provider: "openstreetmap",
+      });
+      const address =
+        newOffer.exchange_address.number.toString() +
+        " " +
+        newOffer.exchange_address.street +
+        " " +
+        newOffer.exchange_address.city;
+      const coord = await geocoder.geocode(address.toLowerCase());
+      const newAddress = await addressRepository.createAddress(
+        newOffer.exchange_address,
+        coord
+      );
+
+      // UPDATE ATTRIBUTES OF OFFER
+      newOffer.is_owner_address = false;
+
+      const offer = await offerRepository.repositoryUpdateOffer(
+        _id,
+        newOffer,
+        newAddress[0][0].id
+      );
+
+      // DESTROY OLD ADDRESS IF IS NOT ADDRESS OF OWNER
+      const reqOwnerAddressId = await userRepository.getOwnerAddressId(
+        newOffer.owner.id
+      );
+      const ownerAddressId = reqOwnerAddressId[0].address_id;
+      if (oldAddressId !== ownerAddressId) {
+        await addressRepository.deleteAddress(oldAddressId);
+      }
+
+      return offer;
     }
   },
 
