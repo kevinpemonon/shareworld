@@ -136,7 +136,6 @@ module.exports = {
 
     },
     loginUserService: function (mail, password) {
-        console.log(`AuthService: LoginUserService-> mail: ${mail}, password: ${password}`);
         
         return new Promise((resolve, reject) => {
             try {
