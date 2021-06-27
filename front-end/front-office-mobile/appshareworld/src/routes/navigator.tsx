@@ -35,18 +35,19 @@ const Tab = createBottomTabNavigator();
 
 const HomeStack = createStackNavigator();
 
-function messageDisconnect(props: Props) {
-  const navigation = useNavigation();
-  if (props.isDisconnected == false) {
-    authService.login_service;
-    console.log("Connecté");
-  }
-  if (props.isDisconnected == true) {
-    authService.logout_service();
-    navigation.navigate("HomeScreen");
-    console.log("Déconnecté");
-  }
-}
+// function messageDisconnect(props: Props) {
+//   const navigation = useNavigation();
+//   if (props.isDisconnected == false) {
+//     authService.login_service;
+//     console.log("Connecté");
+//   }
+//   if (props.isDisconnected == true) {
+//     authService.logout_service();
+//     navigation.navigate("HomeScreen");
+//     console.log("Déconnecté");
+//   }
+// }
+
 function HomeStackScreen() {
   return (
     <HomeStack.Navigator

@@ -1,6 +1,6 @@
-front-end/front-office-mobile/AppShareWorld/node_modules/**/*
-front-end/front-office-mobile/AppShareWorld/.expo/*
-front-end/front-office-mobile/AppShareWorld/npm-debug.*
+front-end/front-office-mobile/appshareworld/node_modules/
+front-end/front-office-mobile/appshareworld/.expo/
+front-end/front-office-mobile/appshareworld/npm-debug.*
 back-end/api/node_modules/**/*
 back-end/api/.env
 back-end/api/uploads/*
@@ -10,7 +10,7 @@ back-end/api/uploads/*
 *.key
 *.mobileprovision
 *.orig.*
-front-end/front-office-mobile/AppShareWorld/web-build/
+front-end/front-office-mobile/appShareWorld/web-build/
 .expo/*
 # macOS
 .DS_Store

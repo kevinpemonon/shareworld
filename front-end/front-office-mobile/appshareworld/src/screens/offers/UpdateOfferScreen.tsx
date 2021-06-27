@@ -125,7 +125,7 @@ const UpdateOfferScreen: React.FC = ({ route }: any) => {
 
   const onChangeNumberAddress = (value: string) => {
     const newOffer: NsOffer.IOfferData = offer;
-    (newOffer.exchange_address.number = value), 10;
+    newOffer.exchange_address.number = value;
     setOffer(newOffer);
     generateView(false);
   };
@@ -341,8 +341,7 @@ const UpdateOfferScreen: React.FC = ({ route }: any) => {
   };
 
   const modal = (): JSX.Element => {
-    let result: JSX.Element = <View></View>;
-    result = (
+    const result: JSX.Element = (
       <View
         style={{
           position: "absolute",
