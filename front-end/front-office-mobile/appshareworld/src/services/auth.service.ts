@@ -151,7 +151,7 @@ const register_service = async (
 
 // ? Logout method
 const logout_service = () => {
-  const logoutrequest = axios({
+  axios({
     method: "POST",
     url: url + "auth/logout",
   })
@@ -168,14 +168,14 @@ const logout_service = () => {
 };
 // ? Update method
 
-const update_service = () => {
-  const updaterequest = axios({
-    method: "POST",
-    url: url + "auth/update",
-  }).then((updateuser: any) => {
-    localStorage.setItem("accessToken", updateuser.data);
-    console.log(updateuser.data);
-  });
-};
+// const update_service = () => {
+//   const updaterequest = axios({
+//     method: "POST",
+//     url: url + "auth/update",
+//   }).then((updateuser: any) => {
+//     localStorage.setItem("accessToken", updateuser.data);
+//     console.log(updateuser.data);
+//   });
+// };
 
 export const authService = { login_service, register_service, logout_service };

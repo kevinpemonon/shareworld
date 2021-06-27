@@ -1,5 +1,5 @@
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
-import React, { useCallback, useEffect, useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -20,7 +20,7 @@ const MyDonnationsScreen: React.FC = ({ route }: any) => {
   const [listOffers, setListOffers] = useState<NsOffer.IOfferData[]>([]);
   const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
-  const my_user: IUser = useSelector((state: UserState) => state.user);
+  // const my_user: IUser = useSelector((state: UserState) => state.user);
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
@@ -30,7 +30,7 @@ const MyDonnationsScreen: React.FC = ({ route }: any) => {
   }, [navigation]);
 
   const getListOffers = async () => {
-    const { userId } = route.params;
+    // const { userId } = route.params;
     const url = `http://${config.ip}:${config.port}/offers/createdBy/${1}`;
     await fetch(url)
       .then((res) => res.json())

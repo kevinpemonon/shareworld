@@ -5,45 +5,24 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  Button,
-  Image,
   ScrollView,
 } from "react-native";
 import { authService } from "../../services/auth.service";
-import { StackActions } from "@react-navigation/native";
-import ProfileStack from "../../routes/navigator";
-
 import { Dispatch } from "redux";
 import { useDispatch, useSelector } from "react-redux";
-import { createStackNavigator } from "@react-navigation/stack";
-import HomeScreen from "../HomeScreen";
 import { useNavigation } from "@react-navigation/core";
 import { COLORS } from "../../constant/colors";
 
 export const SignInScreen: React.FC = ({ navigation }: any) => {
-  // ? Initialize State value
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // Retrieve store value
-  const my_user: IUser = useSelector((state: UserState) => state.user);
   const navigationHook = useNavigation();
-
   const dispatch: Dispatch<any> = useDispatch();
 
   const signIn = () => {
     authService.login_service(email, password, dispatch);
-
     navigationHook.navigate("ProfileScreen");
-
-    // const pushAction = StackActions.push('ProfileScreen');
-
-    // navigation.dispatch(pushAction);
   };
-
-  // const test = () => {
-  //   console.log(window.localStorage.getItem('accessToken'));
-  // }
 
   console.log("DONE");
   return (

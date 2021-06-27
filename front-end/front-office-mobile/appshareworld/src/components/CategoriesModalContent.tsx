@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, FlatList, TextInput, ListRenderItem, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, FlatList, ListRenderItem, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import { COLORS } from './Styles';
@@ -16,7 +16,7 @@ const CategoriesModalContent: React.FC<Props> = ({ getCategory }) => {
 
     const [categories, setCategories] = useState<NsCategory.ICategory[]>([]);
     const [errorFound, setErrorFound] = useState(false);
-    const [count, setCount] = useState(0);
+    const [count] = useState(0);
 
     useEffect(() => {
 

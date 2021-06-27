@@ -6,7 +6,6 @@ import {
   Image,
   FlatList,
   ListRenderItem,
-  Platform,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import NsOffer from "../models/NsOffer";

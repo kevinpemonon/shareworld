@@ -1,4 +1,3 @@
-import NsCategory from "../models/NsCategory";
 import NsOffer from "../models/NsOffer";
 import NsUser from "../models/NsUser";
 
@@ -55,29 +54,4 @@ export const initOffer = (): NsOffer.IOfferData => {
   return offer;
 };
 
-export const initUserWantedOffer = (): NsUser.IUserWantedOfferData => {
-  const user: NsUser.IUserWantedOfferData = {
-    id: 1,
-    first_name: "",
-    last_name: "",
-    mail: "",
-    phone: "",
-    note: "",
-    user_want_offers: {
-      validate_by_aquirer: false,
-      validate_by_owner: false,
-    },
-  };
-  return user;
-};
-
-export const initStates = () => {
-  const states = [
-    { label: "Comme neuf", value: "Comme neuf" },
-    { label: "Bon état", value: "Bon état" },
-    { label: "État moyen", value: "État Moyen" },
-    { label: "À bricoler", value: "À bricoler" },
-  ];
-  return states;
-};
 

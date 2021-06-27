@@ -5,7 +5,6 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
-  Image,
   ScrollView,
 } from "react-native";
 import { authService } from "../../services/auth.service";
@@ -35,11 +34,8 @@ const SignUpScreen: React.FC = () => {
 
   const [lastname, setLastName] = useState("");
   const [firstname, setFirstName] = useState("");
-  const [fullname, setFullName] = useState("");
   const [phone, setPhone] = useState("");
-  const [urlavatar, setUrlAvatar] = useState("");
-  const [status, setStatus] = useState("");
-  const [credit, setCredit] = useState("");
+  const [setUrlAvatar] = useState("");
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmpassword, setConfirmPassword] = useState("");
@@ -62,17 +58,13 @@ const SignUpScreen: React.FC = () => {
     const newAddress = address;
     if (champ === Address_input.CITY) {
       newAddress.city = str;
-    }
-    else if (champ === Address_input.COMPLEMENT) {
+    } else if (champ === Address_input.COMPLEMENT) {
       newAddress.complement = str;
-    }
-    else if (champ === Address_input.NUMBER_STREET) {
+    } else if (champ === Address_input.NUMBER_STREET) {
       newAddress.number = parseInt(str, 10);
-    }
-    else if (champ === Address_input.STREET) {
+    } else if (champ === Address_input.STREET) {
       newAddress.street = str;
-    }
-    else if (champ === Address_input.ZIPCODE) {
+    } else if (champ === Address_input.ZIPCODE) {
       newAddress.zipcode = str;
     }
     setAddress(newAddress);
@@ -80,16 +72,8 @@ const SignUpScreen: React.FC = () => {
 
   // ? check Email and password
 
-  const verifyMailFormat = (mail: string) => {
-    checkMail(mail);
-  };
-
-  const verifyPasswordFormat = (password: string) => {
-    checkPassword(password);
-  };
   const onClickSubmit = () => {
-
-    console.log('START');
+    console.log("START");
     if (!checkStr(lastname, 3, 26)) {
       console.log("Nom de famille incorrect");
       return;
@@ -112,8 +96,16 @@ const SignUpScreen: React.FC = () => {
       console.log("mauvais format mot de passe");
       return;
     }
-    console.log('DONE');
-    authService.register_service(firstname, lastname, phone, 50, mail, password, address)
+    console.log("DONE");
+    authService.register_service(
+      firstname,
+      lastname,
+      phone,
+      50,
+      mail,
+      password,
+      address
+    );
     navigationHook.navigate("ProfileScreen");
   };
 
@@ -131,7 +123,7 @@ const SignUpScreen: React.FC = () => {
 
       <View style={styles.inputView}>
         <TextInput
-        testID={'lastname'}
+          testID={"lastname"}
           style={styles.TextInput}
           placeholder="Nom de Famille"
           placeholderTextColor="#E9383F"
@@ -141,7 +133,7 @@ const SignUpScreen: React.FC = () => {
 
       <View style={styles.inputView}>
         <TextInput
-        testID={'firstname'}
+          testID={"firstname"}
           style={styles.TextInput}
           placeholder="Prénom"
           placeholderTextColor="#E9383F"
@@ -151,7 +143,7 @@ const SignUpScreen: React.FC = () => {
 
       <View style={styles.inputView}>
         <TextInput
-        testID={'phone'}
+          testID={"phone"}
           style={styles.TextInput}
           placeholder="Téléphone"
           placeholderTextColor="#E9383F"
@@ -161,7 +153,7 @@ const SignUpScreen: React.FC = () => {
 
       <View style={styles.inputView}>
         <TextInput
-        testID={'avatar'}
+          testID={"avatar"}
           style={styles.TextInput}
           placeholder="AvatarUrl"
           placeholderTextColor="#E9383F"
@@ -171,7 +163,7 @@ const SignUpScreen: React.FC = () => {
 
       <View style={styles.inputView}>
         <TextInput
-          testID={'email'}
+          testID={"email"}
           style={styles.TextInput}
           placeholder="Email"
           placeholderTextColor="#E9383F"
@@ -180,7 +172,7 @@ const SignUpScreen: React.FC = () => {
       </View>
       <View style={styles.inputView}>
         <TextInput
-        testID={'password'}
+          testID={"password"}
           style={styles.TextInput}
           placeholder="Mot de passe"
           placeholderTextColor="#E9383F"
@@ -190,7 +182,7 @@ const SignUpScreen: React.FC = () => {
       </View>
       <View style={styles.inputView}>
         <TextInput
-        testID={'verifypassword'}
+          testID={"verifypassword"}
           style={styles.TextInput}
           placeholder="Confirmation mot de passe"
           placeholderTextColor="#E9383F"
@@ -203,7 +195,7 @@ const SignUpScreen: React.FC = () => {
 
       <View style={styles.inputView}>
         <TextInput
-        testID={'number'}
+          testID={"number"}
           style={styles.TextInput}
           placeholder="Number"
           placeholderTextColor="#E9383F"
@@ -214,7 +206,7 @@ const SignUpScreen: React.FC = () => {
       </View>
       <View style={styles.inputView}>
         <TextInput
-        testID={'street'}
+          testID={"street"}
           style={styles.TextInput}
           placeholder="Street"
           placeholderTextColor="#E9383F"
@@ -225,7 +217,7 @@ const SignUpScreen: React.FC = () => {
       </View>
       <View style={styles.inputView}>
         <TextInput
-        testID={'addressmore'}
+          testID={"addressmore"}
           style={styles.TextInput}
           placeholder="Complement"
           placeholderTextColor="#E9383F"
@@ -236,7 +228,7 @@ const SignUpScreen: React.FC = () => {
       </View>
       <View style={styles.inputView}>
         <TextInput
-        testID={'city'}
+          testID={"city"}
           style={styles.TextInput}
           placeholder="City"
           placeholderTextColor="#E9383F"
@@ -247,7 +239,7 @@ const SignUpScreen: React.FC = () => {
       </View>
       <View style={styles.inputView}>
         <TextInput
-        testID={'zipcode'}
+          testID={"zipcode"}
           style={styles.TextInput}
           placeholder="ZipCode"
           placeholderTextColor="#E9383F"
@@ -256,7 +248,7 @@ const SignUpScreen: React.FC = () => {
           }
         />
       </View>
-      <TouchableOpacity onPress={onClickSubmit} testID={'submit'}>
+      <TouchableOpacity onPress={onClickSubmit} testID={"submit"}>
         <View style={styles.button}>
           <Text style={styles.buttonText}>Submit</Text>
         </View>

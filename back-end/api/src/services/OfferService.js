@@ -129,7 +129,7 @@ module.exports = {
           });
 
           // Create images
-          const pictureOffer = await PictureOffer.bulkCreate(pictures);
+          await PictureOffer.bulkCreate(pictures);
         }
 
         if (
@@ -345,7 +345,7 @@ module.exports = {
       return { success: 0, message: "Can't get offer to delete" };
     }
     const offer = resultOffer[0];
-    const deleteOffer = await offerRepository.repositoryDeleteOffer(offerId);
+    await offerRepository.repositoryDeleteOffer(offerId);
     if (!offer.is_owner_address) {
       const addressId = offer.exchange_address_id;
       await addressRepository.deleteAddress(addressId);

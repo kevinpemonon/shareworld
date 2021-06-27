@@ -1,17 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { COLORS } from "../constant/colors";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TextInput,
-  Switch,
-  ScrollView,
-  Button,
-  TouchableOpacity,
-} from "react-native";
+import { Text, TouchableOpacity } from "react-native";
 
 interface Props {
   label: string;
