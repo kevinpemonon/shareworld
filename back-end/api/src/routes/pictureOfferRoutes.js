@@ -31,10 +31,7 @@ const configMulter = {
 
 pictureOfferRouter.get("/:offerId", PictureOfferController.getAllPicturesByOffer);
 
-pictureOfferRouter.get("/offers/:name", (req, res) => {
-  const { name } = req.params;
-  res.sendFile(path.join(__dirname, "../../uploads/offers/" + name));
-});
+pictureOfferRouter.get("/offers/:name", PictureOfferController.getFile());
 
 pictureOfferRouter.post("/", multer(configMulter).single("image"), PictureOfferController.createPicture);
 

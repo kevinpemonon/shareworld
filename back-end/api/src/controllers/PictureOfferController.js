@@ -9,6 +9,11 @@ module.exports = {
     return res.status(201).json(response);
   },
 
+  async getFile(req, res) {
+    const { name } = req.params;
+    res.sendFile(path.join(__dirname, "../../uploads/offers/" + name));
+  },
+
   async createPicture(req, res, next) {
     const { id } = req.body;
     const image = req.file;
