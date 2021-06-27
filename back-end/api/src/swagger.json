@@ -1,0 +1,582 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "ShareWorld Api",
+    "version": "1.0.0",
+    "description": "ShareWorld Api: Project 3",
+    "liscence": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "contact": {
+      "namme": "ShareWorld",
+      "url": "https://shareworld.io",
+      "email": "info@shareworld.io"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3333"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Offers",
+      "description": "Offer management API"
+    },
+    {
+      "name": "Categories",
+      "description": "Category management API"
+    }
+  ],
+  "paths": {
+    "/offers": {
+      "get": {
+        "summary": "Returns the list of all the offers",
+        "tags": ["Offers"],
+        "responses": {
+          "201": {
+            "description": "The list of the offers",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OffersOut"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new offer",
+        "tags": ["Offers"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/OffersIn"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The offer was successfully created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OffersOut"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Content cannot be empty"
+          },
+          "500": {
+            "description": "Some error occurred while creating the offer."
+          },
+          "501": {
+            "description": "Error occurred when uploading the images"
+          }
+        }
+      }
+    },
+    "/offers/search": {
+      "get": {
+        "summary": "Returns the list of the offers searched",
+        "tags": ["Offers"],
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Find words by title and description",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Category of the object to fetch",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "state[]",
+            "in": "query",
+            "description": "State of the object to fetch",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": ["Comme neuf", "Bon état", "État Moyen", "À bricoler"]
+              }
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "days",
+            "in": "query",
+            "description": "Days of the object to fetch",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "distance",
+            "in": "query",
+            "description": "Distance of the object to fetch",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "latitude",
+            "in": "query",
+            "description": "Latitude of the object to fetch",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "format": "float"
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "longitude",
+            "in": "query",
+            "description": "Longitude of the object to fetch",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "format": "float"
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "description": "The numbers of items to return",
+            "required": true,
+            "default": 5,
+            "schema": {
+              "type": "integer"
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "page_number",
+            "in": "query",
+            "description": "The page number",
+            "required": true,
+            "default": 1,
+            "schema": {
+              "type": "integer"
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "description": "Sort by date or distance",
+            "required": false,
+            "default": "date",
+            "schema": {
+              "type": "string",
+              "enum": ["date", "distance"]
+            },
+            "style": "form",
+            "explode": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The list of the offers",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OffersOut"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The offers were not found"
+          }
+        }
+      }
+    },
+    "/offers/{id}": {
+      "get": {
+        "summary": "Get the offer by id",
+        "tags": ["Offers"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The offer id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimun": 1
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The offer description by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OffersOut"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The offer was not found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete an offer by id",
+        "tags": ["Offers"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The offer id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimun": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The offer is deleted"
+          },
+          "400": {
+            "description": "OfferId can not be null"
+          },
+          "500": {
+            "description": "Offer to delete has not be found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update an offer by id",
+        "tags": ["Offers"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The offer id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimun": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The offer has been updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OffersOut"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "OfferId can not be null"
+          },
+          "500": {
+            "description": "Offer to update has not be found"
+          }
+        }
+      }
+    },
+    "/offers/createdBy/{id}": {
+      "get": {
+        "summary": "Returns the list of all offers created by user",
+        "tags": ["Offers"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The user id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimun": 1
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "All the offer of user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OffersOut"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "UserId can not be null"
+          },
+          "500": {
+            "description": "No offers for this user"
+          }
+        }
+      }
+    },
+    "/categories": {
+      "get": {
+        "summary": "Returns the list of all the categories",
+        "tags": ["Categories"],
+        "responses": {
+          "201": {
+            "description": "The list of the categories",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CategoryOut"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "OffersIn": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "category_id": {
+            "type": "integer"
+          },
+          "state": {
+            "type": "string",
+            "enum": ["Comme neuf", "Bon état", "État Moyen", "À bricoler"]
+          },
+          "owner_id": {
+            "type": "integer"
+          },
+          "exchange_address": {
+            "$ref": "#/components/schemas/AddressIn"
+          },
+          "is_owner_address": {
+            "type": "boolean"
+          },
+          "display_mail": {
+            "type": "boolean"
+          },
+          "display_phone": {
+            "type": "boolean"
+          },
+          "images": {
+            "type": "array",
+            "maxItems": 3,
+            "items": {
+              "type": "string",
+              "format": "binary",
+              "contentMediaType": ["image/png", "image/jpg", "image/jpeg"],
+              "contentEncoding": "base64"
+            }
+          }
+        },
+        "required": [
+          "label",
+          "images",
+          "category_id",
+          "state",
+          "owner_id",
+          "exchange_address",
+          "is_owner_address"
+        ]
+      },
+      "OffersOut": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "label": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "owner": {
+            "$ref": "#/components/schemas/Owner"
+          },
+          "exchange_address": {
+            "$ref": "#/components/schemas/AddressOut"
+          },
+          "display_mail": {
+            "type": "boolean"
+          },
+          "display_phone": {
+            "type": "boolean"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "pictures": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "AddressOut": {
+        "type": "object",
+        "properties": {
+          "street": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "zipcode": {
+            "type": "string"
+          },
+          "complement": {
+            "type": "string"
+          },
+          "latitude": {
+            "type": "integer"
+          },
+          "longitude": {
+            "type": "integer"
+          },
+          "distance": {
+            "type": "integer"
+          }
+        }
+      },
+      "AddressIn": {
+        "type": "object",
+        "properties": {
+          "street": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "zipcode": {
+            "type": "string"
+          },
+          "complement": {
+            "type": "string"
+          },
+          "latitude": {
+            "type": "integer"
+          },
+          "longitude": {
+            "type": "integer"
+          }
+        }
+      },
+      "Owner": {
+        "type": "object",
+        "properties": {
+          "user_name": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "mail": {
+            "type": "string"
+          },
+          "note": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      },
+      "CategoryOut": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "label": {
+            "type": "string"
+          },
+          "image_url": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
