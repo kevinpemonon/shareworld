@@ -5,8 +5,7 @@ import {
   Text,
   FlatList,
   ListRenderItem,
-  ActivityIndicator,
-  StyleSheet,
+  ActivityIndicator
 } from "react-native";
 import { COLORS } from "../../constant/colors";
 import NsUser from "../../models/NsUser";

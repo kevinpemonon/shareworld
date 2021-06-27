@@ -14,7 +14,7 @@ import { COLORS } from "../../constant/colors";
 import { DateHelper } from "../../helpers/DateHelper";
 import NsOffer from "../../models/NsOffer";
 import config from "./../../config.json";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 const MyDonnationsScreen: React.FC = ({ route }: any) => {
   const [listOffers, setListOffers] = useState<NsOffer.IOfferData[]>([]);

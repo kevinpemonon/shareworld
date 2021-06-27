@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { authService } from "../../services/auth.service";
 import { Dispatch } from "redux";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/core";
 import { COLORS } from "../../constant/colors";
 
